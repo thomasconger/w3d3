@@ -9,7 +9,6 @@ def range(start,finish)
 
 end
 
-
 # Exponentiation
 # Write two versions of exponent that use two different recursions:
 
@@ -31,9 +30,22 @@ def rec_1(base,power)
   base * rec_1(base, power-1)
 
 end
+# puts rec_1(0,-2)
 
-puts rec_1(0,-2)
+# recursion 2
+# exp(b, 0) = 1
+# exp(b, 1) = b
+# exp(b, n) = exp(b, n / 2) ** 2             [for even n]
+# exp(b, n) = b * (exp(b, (n - 1) / 2) ** 2) [for odd n]
+def rec_2(base, power)
+  return 1 if power==0
+  if power.even?
+     temp = rec_2(base, power/2)
+     return temp * temp
+  else
+    temp = rec_2(base, (power-1)/2)
+    return base * temp * temp
+  end
+end
 
-#3, 3
-
-# (3,3)
+p rec_2(2,9001)
