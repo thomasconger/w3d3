@@ -77,4 +77,34 @@ def rec_fib(n)
   memo << (memo[-1] + memo[-2])
 end
 
-p rec_fib(3000)
+def b_search(array,target)
+
+  #base case
+  #return index of target if middle of array is target
+  i = array.length / 2
+  return nil if array.length == 0
+  return i if array[i] == target
+
+
+  if array[i] < target
+    memo = b_search(array[i+1..-1],target)
+    return nil if memo.nil?
+    i + 1 + memo
+  else
+    b_search(array[0...i], target)
+  end
+
+  #return the number of cases that have been partitioned (let us save the index), save i
+  #return the value sent back
+  #conditionally combine them if the latter is not nil
+
+end
+
+
+p b_search([1, 2, 3], 1) # => 0
+p b_search([2, 3, 4, 5], 3) # => 1
+p b_search([2, 4, 6, 8, 10], 6) # => 2
+p b_search([1, 3, 4, 5, 9], 5) # => 3
+p b_search([1, 2, 3, 4, 5, 6], 6) # => 5
+p b_search([1, 2, 3, 4, 5, 6], 0) # => nil
+p b_search([1, 2, 3, 4, 5, 7], 6) # => nil
