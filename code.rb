@@ -48,15 +48,27 @@ def rec_2(base, power)
   end
 end
 
+
+
 def deep_dup(arr)
 
   return [] if arr.length == 0
-  if arr[0].is_a?(Array)
-    return deep_dup(arr[0]) + deep_dup(arr[1..-1])
-  else
-    return arr[0] + deep_dup(arr[1..-1])
-  end
-  #base1, return val
 
+  arr.map do |ele|
+    if ele.is_a?(Array)
+      deep_dup(ele)
+    else
+      ele
+    end
+  end
 
 end
+
+
+
+ # if arr[0].is_a?(Array)
+  #   return deep_dup(arr[0]) + deep_dup(arr[1..-1])
+  # else
+  #   return arr[0] + deep_dup(arr[1..-1])
+  # end
+  #base1, return val
