@@ -100,11 +100,43 @@ def b_search(array,target)
 
 end
 
+# Implement a method merge_sort that sorts an Array:
 
-p b_search([1, 2, 3], 1) # => 0
-p b_search([2, 3, 4, 5], 3) # => 1
-p b_search([2, 4, 6, 8, 10], 6) # => 2
-p b_search([1, 3, 4, 5, 9], 5) # => 3
-p b_search([1, 2, 3, 4, 5, 6], 6) # => 5
-p b_search([1, 2, 3, 4, 5, 6], 0) # => nil
-p b_search([1, 2, 3, 4, 5, 7], 6) # => nil
+# The base cases are for arrays of length zero or one. 
+#Do not use a length-two array as a base case. This is unnecessary.
+# You'll want to write a merge helper method to merge the sorted halves.
+
+def merge_sort(arr)
+  return arr if arr.length <= 1
+  if arr.length == 2
+    if (arr[0] <=> arr[1]) == 1
+      arr[1], arr[0] = arr[0], arr[1]
+    end
+    return arr
+  else
+    i = arr.length/2
+    arr1, arr2 = arr[0...i], arr[i..-1]
+    arr1, arr2 = merge_sort(arr1), merge_sort(arr2)
+    merge_helper(arr1, arr2)
+  end
+end
+
+def merge_helper(arr1, arr2)
+  ans = []
+  length = (arr1.length + arr2.length)
+  while ans.length < length
+    if arr1[0].nil?
+      temp = arr2.shift
+    elsif arr2[0].nil?
+      temp = arr1.shift
+    elsif [arr1[0], arr2[0]].min == arr1[0]
+      temp = arr1.shift
+    else  
+      temp = arr2.shift
+    end
+    ans << temp
+  end
+  ans
+end
+
+p merge_sort([-1,-2])
