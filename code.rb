@@ -48,4 +48,15 @@ def rec_2(base, power)
   end
 end
 
-p rec_2(2,9001)
+def deep_dup(arr)
+
+  return [] if arr.length == 0
+  if arr[0].is_a?(Array)
+    return deep_dup(arr[0]) + deep_dup(arr[1..-1])
+  else
+    return arr[0] + deep_dup(arr[1..-1])
+  end
+  #base1, return val
+
+
+end
