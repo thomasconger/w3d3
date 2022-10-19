@@ -64,11 +64,17 @@ def deep_dup(arr)
 
 end
 
+def iter_fib(n)
+  return [0] if n==1
+  return [0,1] if n==2
+  (3..n).inject([0,1]) {|acc, ele| acc << (acc[-1] + acc[-2])}
+end
 
+def rec_fib(n)
+  return [0] if n==1
+  return [0,1] if n==2
+  memo = rec_fib(n-1)
+  memo << (memo[-1] + memo[-2])
+end
 
- # if arr[0].is_a?(Array)
-  #   return deep_dup(arr[0]) + deep_dup(arr[1..-1])
-  # else
-  #   return arr[0] + deep_dup(arr[1..-1])
-  # end
-  #base1, return val
+p rec_fib(3000)
